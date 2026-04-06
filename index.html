@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fukuyama Holiday Stay | 大船渡・三陸の民泊</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Noto+Serif+JP:wght@400;500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F8F4EE;
+    --warm-brown: #7B5C3E;
+    --deep-brown: #4A3728;
+    --sand: #D4B896;
+    --sea-blue: #4A7C9E;
+    --sea-light: #EAF3F8;
+    --green: #5A7A5A;
+    --text: #2C2416;
+    --text-muted: #7A6A5A;
+    --white: #FFFFFF;
+    --border: rgba(123,92,62,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Lato', 'Noto Serif JP', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(248,244,238,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--deep-brown);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--warm-brown); }
+  .nav-book {
+    background: var(--warm-brown);
+    color: var(--white) !important;
+    padding: 0.45rem 1.2rem;
+    border-radius: 4px;
+  }
+  .nav-book:hover { background: var(--deep-brown); color: var(--white) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 8rem 2rem 4rem;
+    background:
+      linear-gradient(180deg, rgba(248,244,238,0.1) 0%, rgba(248,244,238,0.85) 100%),
+      url('https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=1600&q=80') center/cover no-repeat;
+    position: relative;
+  }
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sea-blue);
+    border: 1px solid var(--sea-blue);
+    padding: 0.3rem 1rem;
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    color: var(--deep-brown);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+    font-family: 'Noto Serif JP', serif;
+  }
+  .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--warm-brown);
+    color: var(--white);
+    padding: 0.85rem 2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    transition: background 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--deep-brown); transform: translateY(-1px); }
+  .btn-outline {
+    border: 1.5px solid var(--warm-brown);
+    color: var(--warm-brown);
+    padding: 0.85rem 2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+  .btn-outline:hover { background: var(--warm-brown); color: var(--white); transform: translateY(-1px); }
+
+  /* SECTIONS */
+  section { padding: 5rem 2rem; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sea-blue);
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    color: var(--deep-brown);
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  .section-desc {
+    font-size: 1rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin-bottom: 3rem;
+    font-family: 'Noto Serif JP', serif;
+    line-height: 1.8;
+  }
+
+  /* FEATURES */
+  .features { background: var(--white); }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  .feature-card {
+    padding: 2rem 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--cream);
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .feature-card:hover { box-shadow: 0 4px 24px rgba(74,55,40,0.1); transform: translateY(-3px); }
+  .feature-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .feature-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--deep-brown);
+    margin-bottom: 0.5rem;
+  }
+  .feature-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* GALLERY */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    gap: 1rem;
+  }
+  .gallery-item {
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    background: var(--sand);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .gallery-item:first-child {
+    grid-column: span 2;
+    aspect-ratio: 16/9;
+  }
+  .gallery-placeholder {
+    font-size: 2.5rem;
+    opacity: 0.4;
+  }
+  .gallery-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+    text-align: center;
+  }
+  .gallery-item-wrap { display: flex; flex-direction: column; }
+
+  /* PRICING */
+  .pricing { background: var(--white); }
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .plan-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2rem;
+    background: var(--cream);
+    position: relative;
+  }
+  .plan-card.featured {
+    border-color: var(--warm-brown);
+    border-width: 2px;
+    background: var(--white);
+  }
+  .plan-badge {
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    background: var(--warm-brown);
+    color: var(--white);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.25rem 1rem;
+    border-radius: 20px;
+  }
+  .plan-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--deep-brown);
+    margin-bottom: 0.5rem;
+  }
+  .plan-price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--warm-brown);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+  .plan-price span { font-size: 1rem; font-weight: 400; color: var(--text-muted); }
+  .plan-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+  .plan-features { list-style: none; margin-bottom: 1.5rem; }
+  .plan-features li {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .plan-features li::before { content: "✓"; color: var(--green); font-weight: 700; }
+
+  /* ACTIVITIES */
+  .activities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .activity-card {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    text-align: center;
+    transition: transform 0.2s;
+  }
+  .activity-card:hover { transform: translateY(-3px); }
+  .activity-icon { font-size: 2.5rem; margin-bottom: 0.75rem; display: block; }
+  .activity-card h3 { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--deep-brown); margin-bottom: 0.4rem; }
+  .activity-card p { font-size: 0.83rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* CALENDAR */
+  .calendar-section { background: var(--white); }
+  .calendar-frame {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 2rem;
+    background: var(--cream);
+    padding: 2rem;
+    text-align: center;
+  }
+  .calendar-placeholder {
+    padding: 3rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+  .calendar-placeholder .cal-icon { font-size: 3rem; margin-bottom: 1rem; display: block; }
+  .calendar-embed-note {
+    background: var(--sea-light);
+    border-left: 3px solid var(--sea-blue);
+    padding: 1rem 1.5rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: var(--sea-blue);
+    margin-top: 1rem;
+    text-align: left;
+  }
+
+  /* OWNER */
+  .owner { background: var(--cream); }
+  .owner-inner {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .owner-photo {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: var(--sand);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem;
+    opacity: 0.5;
+  }
+  .owner-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--deep-brown);
+    line-height: 1.6;
+    border-left: 3px solid var(--warm-brown);
+    padding-left: 1.5rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+  }
+  .owner-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--deep-brown);
+    margin-bottom: 0.25rem;
+  }
+  .owner-role { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; }
+  .owner-bio { font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; font-family: 'Noto Serif JP', serif; }
+
+  /* ACCESS */
+  .access { background: var(--white); }
+  .access-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; margin-top: 2rem; }
+  .access-info h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--deep-brown); margin-bottom: 1rem; }
+  .access-list { list-style: none; }
+  .access-list li {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    display: flex; align-items: baseline; gap: 0.75rem;
+  }
+  .access-list li strong { color: var(--deep-brown); min-width: 80px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .map-placeholder {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    height: 280px;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+  .map-placeholder .map-icon { font-size: 2.5rem; }
+
+  /* CONTACT */
+  .contact { background: var(--deep-brown); color: var(--cream); }
+  .contact .section-title { color: var(--cream); }
+  .contact .section-desc { color: rgba(248,244,238,0.7); max-width: 500px; }
+  .contact .section-label { color: var(--sand); border-color: var(--sand); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 3rem; }
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label { font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sand); }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    background: rgba(248,244,238,0.08);
+    border: 1px solid rgba(212,184,150,0.3);
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    color: var(--cream);
+    font-family: 'Lato', sans-serif;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus { border-color: var(--sand); }
+  .form-group textarea { min-height: 120px; resize: vertical; }
+  .form-group select option { background: var(--deep-brown); }
+  .contact-info h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--cream); margin-bottom: 1.5rem; }
+  .contact-item { margin-bottom: 1.5rem; }
+  .contact-item .label { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sand); margin-bottom: 0.25rem; }
+  .contact-item .value { font-size: 0.95rem; color: rgba(248,244,238,0.85); }
+  .sns-links { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
+  .sns-link {
+    border: 1px solid rgba(212,184,150,0.4);
+    color: var(--sand);
+    padding: 0.5rem 1.2rem;
+    border-radius: 4px;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .sns-link:hover { background: rgba(212,184,150,0.15); }
+
+  /* FOOTER */
+  footer {
+    background: #2C2416;
+    color: rgba(248,244,238,0.5);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.82rem;
+  }
+  footer a { color: rgba(248,244,238,0.5); text-decoration: none; }
+  footer a:hover { color: var(--sand); }
+
+  /* DIVIDER */
+  .divider {
+    width: 48px; height: 2px;
+    background: var(--sand);
+    margin: 1rem 0 2rem;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .owner-inner { grid-template-columns: 1fr; }
+    .owner-photo { height: 200px; aspect-ratio: auto; }
+    .access-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; }
+    .gallery-item:first-child { grid-column: span 2; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Fukuyama Holiday Stay</a>
+  <ul class="nav-links">
+    <li><a href="#about">宿について</a></li>
+    <li><a href="#activities">体験</a></li>
+    <li><a href="#pricing">料金</a></li>
+    <li><a href="#access">アクセス</a></li>
+    <li><a href="#contact">お問い合わせ</a></li>
+    <li><a href="https://www.airbnb.jp" target="_blank" class="nav-book">予約する</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <span class="hero-tag">大船渡・三陸 / Ofunato, Sanriku Coast</span>
+    <h1>Fukuyama<br>Holiday Stay</h1>
+    <p class="hero-sub">三陸の海と自然に囲まれた、あなたの第二の家。<br>BMXライダーもファミリーも、ゆっくりとくつろいでください。</p>
+    <div class="hero-btns">
+      <a href="https://www.airbnb.jp" target="_blank" class="btn-primary">AirB&Bで予約する</a>
+      <a href="#about" class="btn-outline">宿を見る</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="features">
+  <div class="section-inner">
+    <p class="section-label">About the Stay</p>
+    <h2 class="section-title">三陸のアットホームな宿</h2>
+    <div class="divider"></div>
+    <p class="section-desc">大船渡のリアス式海岸を望む静かな立地。BMXライダーの遠征拠点に、家族の思い出づくりに、防波堤釣りのベースキャンプに。福山家が心を込めてお迎えします。</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <span class="feature-icon">🏄</span>
+        <h3>BMXライダー歓迎</h3>
+        <p>自転車の洗車スペース・工具完備。三陸エリアのBMXスポット情報もご案内します。</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🎮</span>
+        <h3>ゲームルーム</h3>
+        <p>PlayStation 5とレーシングコックピット完備。ボードゲームも多数。雨の日も楽しめます。</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🐕</span>
+        <h3>柴犬とお散歩</h3>
+        <p>宿の看板犬・柴犬と一緒に三陸の朝の空気を楽しむ散歩プランがあります。</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🎣</span>
+        <h3>防波堤・船釣りガイド</h3>
+        <p>大船渡湾での釣りスポットをご案内。地元の漁師さんとの船釣り手配も可能です。</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🌊</span>
+        <h3>三陸の絶景</h3>
+        <p>碁石海岸・リアス式海岸・碁石崎灯台など、徒歩・車で行ける絶景スポットが満載。</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🍣</span>
+        <h3>三陸グルメ案内</h3>
+        <p>さんま・牡蠣・ウニなど三陸の新鮮な海の幸を楽しめる地元のお店をご紹介します。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-inner">
+    <p class="section-label">Photo Gallery</p>
+    <h2 class="section-title">宿の写真</h2>
+    <div class="divider"></div>
+    <p class="section-desc">※ お写真の準備ができ次第、こちらに掲載します。</p>
+    <div class="gallery-grid">
+      <div class="gallery-item-wrap" style="grid-column: span 2;">
+        <div class="gallery-item" style="aspect-ratio:16/9; grid-column:span 2;">
+          <span class="gallery-placeholder">🏠</span>
+        </div>
+        <p class="gallery-label">外観・エントランス</p>
+      </div>
+      <div class="gallery-item-wrap">
+        <div class="gallery-item"><span class="gallery-placeholder">🛏</span></div>
+        <p class="gallery-label">寝室</p>
+      </div>
+      <div class="gallery-item-wrap">
+        <div class="gallery-item"><span class="gallery-placeholder">🎮</span></div>
+        <p class="gallery-label">ゲームルーム</p>
+      </div>
+      <div class="gallery-item-wrap">
+        <div class="gallery-item"><span class="gallery-placeholder">🌊</span></div>
+        <p class="gallery-label">周辺・碁石海岸</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACTIVITIES -->
+<section id="activities" style="background: var(--white);">
+  <div class="section-inner">
+    <p class="section-label">Activities & Spots</p>
+    <h2 class="section-title">体験・周辺スポット</h2>
+    <div class="divider"></div>
+    <p class="section-desc">大船渡・三陸エリアならではの体験が待っています。BMXライダーも自然派も、ゲーマーも釣り好きも大歓迎。</p>
+    <div class="activities-grid">
+      <div class="activity-card">
+        <span class="activity-icon">🚴</span>
+        <h3>BMXスポット巡り</h3>
+        <p>三陸エリアのBMXパーク・ストリートスポット情報を地図でご案内。</p>
+      </div>
+      <div class="activity-card">
+        <span class="activity-icon">🎮</span>
+        <h3>PS5 レーシングコックピット</h3>
+        <p>本格レーシングシートで白熱のレースゲームを楽しめます。</p>
+      </div>
+      <div class="activity-card">
+        <span class="activity-icon">🐕</span>
+        <h3>柴犬とお散歩</h3>
+        <p>三陸の海辺・山道を看板犬と一緒に朝のお散歩。癒しの時間。</p>
+      </div>
+      <div class="activity-card">
+        <span class="activity-icon">🎣</span>
+        <h3>防波堤釣り</h3>
+        <p>大船渡湾の防波堤で気軽に釣り体験。道具の貸し出しも相談可。</p>
+      </div>
+      <div class="activity-card">
+        <span class="activity-icon">⛵</span>
+        <h3>船釣りガイド</h3>
+        <p>地元漁師さんと一緒に沖へ。三陸の豊かな海を満喫できます。</p>
+      </div>
+      <div class="activity-card">
+        <span class="activity-icon">🎲</span>
+        <h3>ボードゲーム</h3>
+        <p>家族・グループで楽しめるボードゲームを多数ご用意しています。</p>
+      </div>
+      <div class="activity-card">
+        <span class="activity-icon">🏖</span>
+        <h3>碁石海岸</h3>
+        <p>大船渡を代表する景勝地。ドライブで気軽に訪れられます。</p>
+      </div>
+      <div class="activity-card">
+        <span class="activity-icon">🦪</span>
+        <h3>三陸グルメ</h3>
+        <p>さんま・牡蠣・ウニなど新鮮な海の幸を地元のお店でご堪能ください。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="pricing">
+  <div class="section-inner">
+    <p class="section-label">Pricing & Plans</p>
+    <h2 class="section-title">料金・プラン</h2>
+    <div class="divider"></div>
+    <p class="section-desc">1泊から長期滞在まで対応。グループでのご利用もお気軽にご相談ください。</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:2rem;">
+      <div style="background:var(--sea-light); border-left:3px solid var(--sea-blue); padding:1rem 1.5rem; border-radius:4px; font-size:0.9rem; color:var(--sea-blue);">
+        🚴 <strong>BMX施設利用者特別価格　¥5,000／人・泊</strong><br>三陸BMXスタジアムご利用の方限定。ホームページから直接ご予約ください。（口頭確認）
+      </div>
+      <div style="background:#F5F0EA; border-left:3px solid var(--warm-brown); padding:1rem 1.5rem; border-radius:4px; font-size:0.9rem; color:var(--warm-brown);">
+        🏠 <strong>一般価格　¥5,700／人・泊</strong><br>AirB&B経由またはホームページからご予約いただけます。（AirB&Bサービス手数料込み）
+      </div>
+    </div>
+    <div style="background:var(--cream); border:1px solid var(--border); border-radius:8px; padding:1rem 1.5rem; margin-bottom:2rem; font-size:0.85rem; color:var(--text-muted); text-align:center;">
+      🍽️ 全プラン共通：<strong style="color:var(--deep-brown);">1泊2食付き（夕食・朝食）</strong>　心を込めた手料理をご用意します。食物アレルギーや食事制限がある方は事前にご連絡ください。
+    </div>
+    <div class="pricing-grid">
+      <div class="plan-card featured">
+        <span class="plan-badge">🚴 BMX施設利用者特別価格</span>
+        <p class="plan-name">ライダーズプラン</p>
+        <p class="plan-price">¥5,000<span> / 人・泊</span></p>
+        <p class="plan-desc">夕食・朝食付き ｜ 直接予約限定</p>
+        <ul class="plan-features">
+          <li>夕食・朝食付き（2食）</li>
+          <li>全室アメニティ完備</li>
+          <li>Wi-Fi無料</li>
+          <li>PS5レーシングコックピット利用</li>
+          <li>ゲームルーム・ボードゲーム</li>
+          <li>柴犬散歩（希望制）</li>
+          <li>防波堤釣り案内付き</li>
+          <li>BMXスポットマップ提供</li>
+          <li>周辺観光スポット案内</li>
+          <li>長期割引あり（要相談）</li>
+        </ul>
+        <a href="#contact" class="btn-primary" style="width:100%; text-align:center;">ホームページから直接予約</a>
+      </div>
+      <div class="plan-card">
+        <p class="plan-name">一般プラン</p>
+        <p class="plan-price">¥5,700<span> / 人・泊</span></p>
+        <p class="plan-desc">夕食・朝食付き ｜ 人数不問</p>
+        <ul class="plan-features">
+          <li>夕食・朝食付き（2食）</li>
+          <li>全室アメニティ完備</li>
+          <li>Wi-Fi無料</li>
+          <li>PS5レーシングコックピット利用</li>
+          <li>ゲームルーム・ボードゲーム</li>
+          <li>柴犬散歩（希望制）</li>
+          <li>防波堤釣り案内付き</li>
+          <li>BMXスポットマップ提供</li>
+          <li>周辺観光スポット案内</li>
+        </ul>
+        <a href="https://www.airbnb.jp" target="_blank" class="btn-outline" style="width:100%; text-align:center;">AirB&Bで予約</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALENDAR -->
+<section id="calendar" class="calendar-section">
+  <div class="section-inner">
+    <p class="section-label">Availability</p>
+    <h2 class="section-title">空室カレンダー</h2>
+    <div class="divider"></div>
+    <p class="section-desc">Googleカレンダーと連携した空室状況をこちらでご確認いただけます。</p>
+    <div class="calendar-frame">
+      <!-- ここにGoogleカレンダーの埋め込みコードを貼り付けてください -->
+      <div class="calendar-placeholder">
+        <span class="cal-icon">📅</span>
+        <p>Googleカレンダーをここに埋め込みます</p>
+      </div>
+      <div class="calendar-embed-note">
+        💡 設定方法：Googleカレンダー → 「設定と共有」→「カレンダーの統合」→「埋め込みコード」をコピーして、上のプレースホルダーと差し替えてください。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OWNER -->
+<section id="owner" class="owner">
+  <div class="section-inner">
+    <p class="section-label">Your Host</p>
+    <h2 class="section-title">オーナー紹介</h2>
+    <div class="divider"></div>
+    <div class="owner-inner">
+      <div>
+        <div class="owner-photo">👤</div>
+      </div>
+      <div>
+        <p class="owner-name">福山 宏（Hiroshi Fukuyama）</p>
+        <p class="owner-role">Fukuyama Holiday Stay オーナー</p>
+        <blockquote class="owner-quote">「大船渡の海と自然を、訪れるすべての人に感じてほしい」</blockquote>
+        <p class="owner-bio">
+          大船渡で生まれ育った福山宏です。三陸の海・山・食の魅力を存分に楽しんでもらいたいという思いで民泊を始めました。BMXが大好きで、ライダーの皆さんには特別にスポット情報をお伝えできます。柴犬の散歩や防波堤釣り、ゲームでの交流も大歓迎。アットホームな雰囲気で、皆さんの旅が最高の思い出になるようにサポートします。お気軽に声をかけてください！
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCESS -->
+<section id="access" class="access">
+  <div class="section-inner">
+    <p class="section-label">Access</p>
+    <h2 class="section-title">アクセス</h2>
+    <div class="divider"></div>
+    <div class="access-grid">
+      <div class="access-info">
+        <h3>Fukuyama Holiday Stay</h3>
+        <ul class="access-list">
+          <li><strong>住所</strong>岩手県大船渡市（詳細は予約後にご案内）</li>
+          <li><strong>電車</strong>三陸鉄道 大船渡線 大船渡駅より車で約10分</li>
+          <li><strong>バス</strong>BRTバス 大船渡駅停留所より送迎可（要相談）</li>
+          <li><strong>車</strong>三陸自動車道 大船渡ICより約15分</li>
+          <li><strong>駐車場</strong>無料駐車場あり（3台まで）</li>
+          <li><strong>送迎</strong>大船渡駅からの送迎対応可（要事前連絡）</li>
+        </ul>
+      </div>
+      <div>
+        <div class="map-placeholder">
+          <span class="map-icon">🗺</span>
+          <p>地図を表示</p>
+          <p style="font-size:0.8rem; margin-top:0.5rem;">予約確定後に詳細住所をお知らせします</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="section-inner">
+    <p class="section-label" style="border-color:var(--sand); color:var(--sand);">Contact</p>
+    <h2 class="section-title">お問い合わせ</h2>
+    <div class="divider"></div>
+    <p class="section-desc">ご不明な点・特別なご要望はお気軽にどうぞ。通常24時間以内にご返信します。</p>
+    <div class="contact-grid">
+      <div class="contact-form">
+        <div class="form-group">
+          <label>お名前 / Name</label>
+          <input type="text" placeholder="福山 太郎 / Taro Fukuyama">
+        </div>
+        <div class="form-group">
+          <label>メールアドレス / Email</label>
+          <input type="email" placeholder="example@email.com">
+        </div>
+        <div class="form-group">
+          <label>ご希望の宿泊日 / Check-in Date</label>
+          <input type="date">
+        </div>
+        <div class="form-group">
+          <label>ご利用人数 / Guests</label>
+          <select>
+            <option>1名</option>
+            <option>2名</option>
+            <option>3〜4名</option>
+            <option>5〜6名</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>ご質問・ご要望 / Message</label>
+          <textarea placeholder="BMXスポット情報が欲しい、ペット同伴可能か、など何でもお気軽に。&#10;Feel free to ask anything in English too!"></textarea>
+        </div>
+        <button class="btn-primary" style="border:none; cursor:pointer; font-size:0.95rem;" onclick="alert('ありがとうございます！メールフォームは実装後に送信できるようになります。')">送信する / Send</button>
+      </div>
+      <div class="contact-info">
+        <h3>連絡先情報</h3>
+        <div class="contact-item">
+          <p class="label">Email</p>
+          <p class="value"><a href="/cdn-cgi/l/email-protection#8ee6e7fce1cee5effdfdebe7e5efa0ede2fbec" style="color:rgba(248,244,238,0.85);"><span class="__cf_email__" data-cfemail="432b2a312c0328223030262a28226d202f3621">[email&#160;protected]</span></a></p>
+        </div>
+        <div class="contact-item">
+          <p class="label">電話 / Phone</p>
+          <p class="value">+81-XX-XXXX-XXXX</p>
+        </div>
+        <div class="contact-item">
+          <p class="label">対応言語 / Languages</p>
+          <p class="value">日本語・English</p>
+        </div>
+        <div class="contact-item">
+          <p class="label">チェックイン / Check-in</p>
+          <p class="value">15:00〜20:00（要相談）</p>
+        </div>
+        <div class="contact-item">
+          <p class="label">チェックアウト / Check-out</p>
+          <p class="value">〜11:00</p>
+        </div>
+        <div class="sns-links">
+          <a href="https://www.airbnb.jp" target="_blank" class="sns-link">AirB&B</a>
+          <a href="#" class="sns-link">Instagram</a>
+          <a href="#" class="sns-link">Facebook</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<foote
