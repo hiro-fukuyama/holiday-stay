@@ -775,42 +775,68 @@
     <p class="section-desc">ご不明な点・特別なご要望はお気軽にどうぞ。通常24時間以内にご返信します。</p>
     <div class="contact-grid">
       <div class="contact-form">
-        <div class="form-group">
-          <label>お名前 / Name</label>
-          <input type="text" placeholder="福山 太郎 / Taro Fukuyama">
+        <form id="contact-form" action="https://formspree.io/f/xeevnjdq" method="POST">
+          <div class="form-group">
+            <label>お名前 / Name</label>
+            <input type="text" name="お名前" placeholder="福山 太郎 / Taro Fukuyama" required>
+          </div>
+          <div class="form-group">
+            <label>メールアドレス / Email</label>
+            <input type="email" name="メールアドレス" placeholder="example@email.com" required>
+          </div>
+          <div class="form-group">
+            <label>ご希望の宿泊日 / Check-in Date</label>
+            <input type="date" name="宿泊希望日">
+          </div>
+          <div class="form-group">
+            <label>ご利用人数 / Guests</label>
+            <select name="利用人数">
+              <option>1名</option>
+              <option>2名</option>
+              <option>3〜4名</option>
+              <option>5〜6名</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>宿泊数 / Nights</label>
+            <select name="宿泊数">
+              <option>1泊</option>
+              <option>2泊</option>
+              <option>3泊</option>
+              <option>4泊</option>
+              <option>5泊以上（ご相談ください）</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>ご質問・ご要望 / Message</label>
+            <textarea name="メッセージ" placeholder="BMXスポット情報が欲しい、ペット同伴可能か、など何でもお気軽に。&#10;Feel free to ask anything in English too!"></textarea>
+          </div>
+          <button type="submit" class="btn-primary" style="border:none; cursor:pointer; font-size:0.95rem;">送信する / Send</button>
+        </form>
+        <div id="form-success" style="display:none; background:rgba(248,244,238,0.1); border:1px solid var(--sand); border-radius:8px; padding:1.5rem; margin-top:1rem; color:var(--cream); line-height:1.8;">
+          ✅ お問い合わせ内容をオーナーに送信いたしました。<br>
+          予約をご希望された方はまだ確定ではございません。<br>
+          オーナーからの返信をもって確定とさせていただきます。
         </div>
-        <div class="form-group">
-          <label>メールアドレス / Email</label>
-          <input type="email" placeholder="example@email.com">
-        </div>
-        <div class="form-group">
-          <label>ご希望の宿泊日 / Check-in Date</label>
-          <input type="date">
-        </div>
-        <div class="form-group">
-          <label>ご利用人数 / Guests</label>
-          <select>
-            <option>1名</option>
-            <option>2名</option>
-            <option>3〜4名</option>
-            <option>5〜6名</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>宿泊数 / Nights</label>
-          <select>
-            <option>1泊</option>
-            <option>2泊</option>
-            <option>3泊</option>
-            <option>4泊</option>
-            <option>5泊以上（ご相談ください）</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>ご質問・ご要望 / Message</label>
-          <textarea placeholder="BMXスポット情報が欲しい、ペット同伴可能か、など何でもお気軽に。&#10;Feel free to ask anything in English too!"></textarea>
-        </div>
-        <button class="btn-primary" style="border:none; cursor:pointer; font-size:0.95rem;" onclick="alert('ありがとうございます！メールフォームは実装後に送信できるようになります。')">送信する / Send</button>
+        <script>
+          const form = document.getElementById('contact-form');
+          const successMsg = document.getElementById('form-success');
+          form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const data = new FormData(form);
+            const response = await fetch(form.action, {
+              method: 'POST',
+              body: data,
+              headers: { 'Accept': 'application/json' }
+            });
+            if (response.ok) {
+              form.style.display = 'none';
+              successMsg.style.display = 'block';
+            } else {
+              alert('送信に失敗しました。お手数ですが、電話またはメールにてご連絡ください。');
+            }
+          });
+        </script>
       </div>
       <div class="contact-info">
         <h3>連絡先情報</h3>
